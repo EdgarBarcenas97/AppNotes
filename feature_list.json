@@ -1,5 +1,61 @@
 {
   "project": "AppNotes",
   "stack": "android",
-  "features": []
+  "features": [
+    {
+      "id": 1,
+      "name": "create_and_list_notes",
+      "title": "Crear y listar notas",
+      "description": "El usuario escribe una nota con título y contenido, la guarda y la ve en la lista principal, la más reciente primero. Las notas se guardan en el teléfono y siguen ahí al cerrar y reabrir la app.",
+      "acceptance": [
+        "Desde la lista principal se puede abrir un formulario para crear una nota con título y contenido.",
+        "Al guardar una nota con título o contenido, aparece en la lista principal.",
+        "La lista muestra la nota más reciente primero.",
+        "Si título y contenido están vacíos, no se crea ninguna nota.",
+        "Las notas siguen en la lista después de cerrar y reabrir la app.",
+        "Los textos de la interfaz están en español."
+      ],
+      "sdd": true,
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "name": "edit_note",
+      "title": "Editar una nota",
+      "description": "El usuario abre una nota desde la lista y cambia su título o su contenido.",
+      "acceptance": [
+        "Al tocar una nota en la lista, se abre con su título y contenido actuales.",
+        "Al guardar los cambios, la lista muestra el título y el contenido actualizados.",
+        "Los cambios siguen después de cerrar y reabrir la app."
+      ],
+      "sdd": true,
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "name": "delete_note",
+      "title": "Borrar una nota",
+      "description": "El usuario borra una nota. Se borra al instante y un snackbar con \"Deshacer\" permite recuperarla.",
+      "acceptance": [
+        "Al borrar una nota, desaparece de la lista al instante.",
+        "Aparece un snackbar con la acción \"Deshacer\".",
+        "Al tocar \"Deshacer\", la nota vuelve a la lista con su título y contenido.",
+        "Si no se deshace, la nota no vuelve a aparecer al reabrir la app."
+      ],
+      "sdd": true,
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "name": "search_notes",
+      "title": "Buscar notas",
+      "description": "El usuario filtra la lista de notas escribiendo un texto que se busca en el título y el contenido.",
+      "acceptance": [
+        "Al escribir un texto, la lista muestra solo las notas cuyo título o contenido lo contienen.",
+        "Al borrar el texto de búsqueda, se vuelven a ver todas las notas."
+      ],
+      "sdd": true,
+      "status": "pending"
+    }
+  ]
 }

@@ -5,7 +5,11 @@ hacen el resultado verificable y repetible.
 
 ## Producto
 
-_Pendiente: se llena con `/kickoff` (detalle en `docs/product.md`)._
+AppNotes es una app Android de notas rápidas personales: un solo usuario, datos
+solo locales, sin login y siempre offline. La interfaz va en español.
+La v1, por prioridad: crear y listar → editar → borrar (con "Deshacer") → buscar.
+Se hacen en orden las que alcancen en ~90 min; el mínimo es la primera completa.
+Detalle, fuera de alcance y preguntas abiertas en [`docs/product.md`](docs/product.md).
 
 ## Cómo se trabaja
 
