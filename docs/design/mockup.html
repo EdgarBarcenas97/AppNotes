@@ -1,0 +1,393 @@
+<title>AppNotes Pantallas v1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Roboto:wght@400;500&display=swap">
+<style>
+/* Layout: hoja de revisión. Una franja por pantalla, marcos de teléfono por estado en fila que se envuelve. */
+:root {
+  /* Página */
+  --page: #F1F4F2;
+  --ink: #18201D;
+  --muted: #56625D;
+  --rule: #D3DBD7;
+  --chip: #E1EAE5;
+  --tag: #8A4B00;
+  --tag-bg: #FFE9CC;
+  /* App (AppTheme de core/designsystem + tonos M3 derivados de #1F6F5C) */
+  --a-primary: #1F6F5C;
+  --a-on-primary: #FFFFFF;
+  --a-primary-container: #A6F2D9;
+  --a-on-primary-container: #002019;
+  --a-surface: #F7FAF8;
+  --a-container: #EAEFEC;
+  --a-container-high: #E4EAE7;
+  --a-on-surface: #171D1A;
+  --a-on-variant: #3F4945;
+  --a-outline: #BFC9C3;
+  --a-disabled: rgba(23, 29, 26, .38);
+  --a-inverse: #2C3230;
+  --a-on-inverse: #ECF2EE;
+  --a-inverse-primary: #8AD5BE;
+  --a-error: #BA1A1A;
+  --frame: #1E2422;
+  --f-ui: "IBM Plex Sans", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --f-app: Roboto, "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #0D1311; --ink: #DCE4E0; --muted: #9AA8A2; --rule: #27302C; --chip: #1C2522;
+    --tag: #FFC27A; --tag-bg: #3A2A12;
+    --a-primary: #8AD5BE; --a-on-primary: #00382D; --a-primary-container: #005142; --a-on-primary-container: #A6F2D9;
+    --a-surface: #0F1513; --a-container: #1B211F; --a-container-high: #252B29; --a-on-surface: #DEE4E0;
+    --a-on-variant: #BFC9C3; --a-outline: #3F4945; --a-disabled: rgba(222, 228, 224, .38);
+    --a-inverse: #DEE4E0; --a-on-inverse: #2C3230; --a-inverse-primary: #1F6F5C; --a-error: #FFB4AB;
+    --frame: #000000;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #0D1311; --ink: #DCE4E0; --muted: #9AA8A2; --rule: #27302C; --chip: #1C2522;
+  --tag: #FFC27A; --tag-bg: #3A2A12;
+  --a-primary: #8AD5BE; --a-on-primary: #00382D; --a-primary-container: #005142; --a-on-primary-container: #A6F2D9;
+  --a-surface: #0F1513; --a-container: #1B211F; --a-container-high: #252B29; --a-on-surface: #DEE4E0;
+  --a-on-variant: #BFC9C3; --a-outline: #3F4945; --a-disabled: rgba(222, 228, 224, .38);
+  --a-inverse: #DEE4E0; --a-on-inverse: #2C3230; --a-inverse-primary: #1F6F5C; --a-error: #FFB4AB;
+  --frame: #000000;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--page); color: var(--ink); font-family: var(--f-ui); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 32px 64px; display: flex; flex-direction: column; gap: 40px; }
+
+header.top { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: end; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 24px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+h1 { font-size: 30px; line-height: 1.15; font-weight: 600; margin: 0; text-wrap: balance; }
+.lede { margin: 8px 0 0; color: var(--muted); max-width: 62ch; }
+.toggle { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; user-select: none; background: var(--chip); padding: 8px 14px; border-radius: 999px; }
+.toggle input { accent-color: var(--a-primary); width: 16px; height: 16px; margin: 0; }
+.toggle:focus-within { outline: 2px solid var(--a-primary); outline-offset: 2px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; gap: 8px; align-items: center; }
+
+section.screen { display: flex; flex-direction: column; gap: 20px; }
+.screen-head { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; }
+h2 { font-size: 20px; margin: 0; font-weight: 600; }
+.route { font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.screen-desc { margin: 0; color: var(--muted); max-width: 70ch; flex-basis: 100%; }
+
+.row { display: flex; flex-wrap: wrap; gap: 28px 24px; }
+figure.state { margin: 0; width: 280px; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+figcaption { display: flex; flex-direction: column; gap: 6px; }
+.state-name { font-weight: 600; font-size: 14px; }
+.feats { display: flex; flex-wrap: wrap; gap: 6px; }
+.feat { font-family: var(--f-mono); font-size: 11px; padding: 2px 8px; border-radius: 4px; background: var(--chip); color: var(--ink); }
+.note { font-size: 13px; color: var(--muted); }
+
+/* ── Teléfono ── */
+.phone { width: 280px; max-width: 100%; aspect-ratio: 9 / 18.6; background: var(--frame); border-radius: 30px; padding: 8px; }
+.screen-in { position: relative; height: 100%; border-radius: 23px; overflow: hidden; background: var(--a-surface); color: var(--a-on-surface); font-family: var(--f-app); display: flex; flex-direction: column; }
+.status { height: 26px; flex: none; display: flex; justify-content: space-between; align-items: center; padding: 0 18px; font-size: 11px; font-weight: 500; color: var(--a-on-surface); }
+.status i { width: 40px; height: 8px; border-radius: 4px; background: var(--a-on-variant); opacity: .5; }
+.bar { height: 56px; flex: none; display: flex; align-items: center; gap: 4px; padding: 0 4px 0 8px; }
+.bar .t { flex: 1; font-size: 20px; padding-left: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ib { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: var(--a-on-variant); flex: none; }
+.ib svg, .fab svg { width: 24px; height: 24px; fill: currentColor; }
+.tb { font-size: 14px; font-weight: 500; color: var(--a-primary); padding: 10px 12px; border-radius: 20px; flex: none; }
+.tb.off { color: var(--a-disabled); }
+.body { flex: 1; min-height: 0; overflow: hidden; padding: 4px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+.card { background: var(--a-container-high); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.card h3 { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--a-on-variant); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card.notitle p { -webkit-line-clamp: 3; color: var(--a-on-surface); }
+mark { background: var(--a-primary-container); color: var(--a-on-primary-container); border-radius: 2px; padding: 0 1px; }
+.fab { position: absolute; right: 16px; bottom: 16px; width: 56px; height: 56px; border-radius: 16px; background: var(--a-primary-container); color: var(--a-on-primary-container); display: grid; place-items: center; box-shadow: 0 3px 8px rgba(0,0,0,.18); }
+.center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; padding: 24px; }
+.center .big { font-size: 16px; }
+.center .small { font-size: 14px; color: var(--a-on-variant); }
+.spinner { width: 40px; height: 40px; border-radius: 50%; border: 4px solid var(--a-container-high); border-top-color: var(--a-primary); animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+.btn { margin-top: 8px; background: var(--a-primary); color: var(--a-on-primary); font-size: 14px; font-weight: 500; padding: 10px 24px; border-radius: 20px; }
+.snack { position: absolute; left: 12px; right: 12px; bottom: 12px; background: var(--a-inverse); color: var(--a-on-inverse); border-radius: 4px; padding: 6px 8px 6px 16px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; box-shadow: 0 3px 8px rgba(0,0,0,.25); }
+.snack b { color: var(--a-inverse-primary); font-weight: 500; padding: 8px; }
+.search { flex: 1; height: 44px; border-radius: 22px; background: var(--a-container-high); display: flex; align-items: center; padding: 0 16px; font-size: 15px; min-width: 0; }
+.search .caret { border-right: 2px solid var(--a-primary); padding-right: 1px; }
+.field { padding: 6px 16px; }
+.field.title { font-size: 22px; line-height: 1.3; }
+.field.content { font-size: 16px; line-height: 1.5; flex: 1; }
+.hint { color: var(--a-on-variant); opacity: .8; }
+.caret-end::after { content: ""; display: inline-block; width: 2px; height: 1.1em; background: var(--a-primary); vertical-align: text-bottom; margin-left: 1px; }
+.divider { height: 1px; background: var(--a-outline); margin: 0 16px; opacity: .6; }
+.kbd { height: 150px; flex: none; background: var(--a-container); display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; padding: 10px 6px; align-content: start; }
+.kbd i { height: 26px; border-radius: 5px; background: var(--a-container-high); }
+
+/* ── testTags ── */
+[data-tag] { position: relative; }
+.show-tags [data-tag] { outline: 1.5px dashed var(--tag); outline-offset: -1px; }
+.show-tags [data-tag]::after {
+  content: attr(data-tag); position: absolute; z-index: 5; left: 2px; top: 2px; transform: translateY(-100%);
+  font: 500 9.5px/1.3 var(--f-mono); color: var(--tag); background: var(--tag-bg); padding: 1px 4px; border-radius: 3px; white-space: nowrap; pointer-events: none;
+}
+.show-tags .fab[data-tag]::after, .show-tags .snack[data-tag]::after { left: auto; right: 0; }
+.show-tags .body[data-tag]::after, .show-tags .center[data-tag]::after { transform: none; }
+
+/* ── Mapa ── */
+.map { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; padding: 20px; }
+.map svg { display: block; min-width: 620px; width: 100%; height: auto; }
+.map text { font-family: var(--f-ui); fill: var(--ink); }
+.map .lbl { font-size: 12px; fill: var(--muted); }
+.map rect { fill: var(--chip); stroke: var(--rule); }
+.map path { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.map .head { fill: var(--muted); stroke: none; }
+
+table.cover { border-collapse: collapse; width: 100%; font-size: 14px; }
+.cover-wrap { overflow-x: auto; }
+table.cover th, table.cover td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+table.cover th { font-weight: 600; font-size: 13px; color: var(--muted); }
+table.cover td:first-child { font-family: var(--f-mono); font-size: 13px; white-space: nowrap; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-add" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+  <symbol id="i-delete" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+</svg>
+
+<div class="wrap" id="root">
+  <header class="top">
+    <div>
+      <p class="eyebrow">AppNotes · diseño v1 · para aprobar</p>
+      <h1>Pantallas de la v1</h1>
+      <p class="lede">Dos pantallas: la lista de notas y el editor. Cada marco es un estado, con los textos exactos de la app y la feature de <code>feature_list.json</code> que lo cubre. El detalle está en <code>docs/design.md</code>.</p>
+    </div>
+    <label class="toggle" for="tags"><input type="checkbox" id="tags"> Mostrar testTags</label>
+  </header>
+
+  <section class="screen" aria-labelledby="h-map">
+    <div class="screen-head"><h2 id="h-map">Mapa de navegación</h2></div>
+    <div class="map">
+      <svg viewBox="0 0 760 210" role="img" aria-label="La lista abre el editor con el botón más o al tocar una nota. Guardar, borrar o volver regresan a la lista. La lupa abre el modo búsqueda en la misma lista.">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="head" d="M0 0L10 5L0 10z"/></marker></defs>
+        <rect x="20" y="70" width="170" height="64" rx="10"/>
+        <text x="105" y="98" text-anchor="middle" font-weight="600" font-size="15">Lista de notas</text>
+        <text x="105" y="118" text-anchor="middle" class="lbl">notes</text>
+        <rect x="520" y="20" width="220" height="56" rx="10"/>
+        <text x="630" y="45" text-anchor="middle" font-weight="600" font-size="15">Editor · nueva</text>
+        <text x="630" y="63" text-anchor="middle" class="lbl">editor</text>
+        <rect x="520" y="130" width="220" height="56" rx="10"/>
+        <text x="630" y="155" text-anchor="middle" font-weight="600" font-size="15">Editor · editar</text>
+        <text x="630" y="173" text-anchor="middle" class="lbl">editor?noteId={id}</text>
+        <path d="M190 84 C 330 84, 380 48, 518 48" marker-end="url(#arr)"/>
+        <text x="350" y="56" text-anchor="middle" class="lbl">FAB +</text>
+        <path d="M190 120 C 330 120, 380 158, 518 158" marker-end="url(#arr)"/>
+        <text x="350" y="158" text-anchor="middle" class="lbl">tocar una nota</text>
+        <path d="M520 66 C 400 100, 300 100, 192 100" marker-end="url(#arr)"/>
+        <text x="420" y="96" text-anchor="middle" class="lbl">Guardar · ← Volver</text>
+        <path d="M520 176 C 380 200, 260 160, 150 136" marker-end="url(#arr)"/>
+        <text x="330" y="200" text-anchor="middle" class="lbl">Guardar · Borrar → snackbar · ← Volver</text>
+        <path d="M70 70 C 60 20, 150 20, 140 68" marker-end="url(#arr)"/>
+        <text x="105" y="22" text-anchor="middle" class="lbl">lupa ↔ búsqueda (←)</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═════════ Pantalla 1 ═════════ -->
+  <section class="screen" aria-labelledby="h-list">
+    <div class="screen-head">
+      <h2 id="h-list">1 · Lista de notas</h2><span class="route">notes</span>
+      <p class="screen-desc">Todas las notas, la más reciente arriba. El FAB crea una nota, tocar una card la abre para editar y la lupa filtra la lista.</p>
+    </div>
+    <div class="row">
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="t">Notas</span><span class="ib" data-tag="notes_search_button"><svg><use href="#i-search"/></svg></span></div>
+          <div class="body"><div class="center" data-tag="state_loading"><div class="spinner" aria-label="Cargando"></div></div></div>
+        </div></div>
+        <figcaption><span class="state-name">Cargando</span><span class="feats"><span class="feat">create_and_list_notes</span></span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="t">Notas</span><span class="ib" data-tag="notes_search_button"><svg><use href="#i-search"/></svg></span></div>
+          <div class="body"><div class="center" data-tag="state_empty"><span class="big">Todavía no tienes notas.</span><span class="small">Toca + para escribir la primera.</span></div></div>
+          <span class="fab" data-tag="notes_create_fab"><svg><use href="#i-add"/></svg></span>
+        </div></div>
+        <figcaption><span class="state-name">Vacío</span><span class="feats"><span class="feat">create_and_list_notes</span></span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="t">Notas</span><span class="ib" data-tag="notes_search_button"><svg><use href="#i-search"/></svg></span></div>
+          <div class="body" data-tag="notes_list">
+            <div class="card" data-tag="note_item_5"><h3>Comprar para la cena</h3><p>Tortillas, aguacate, limón, cilantro y queso fresco. Ver si queda crema.</p></div>
+            <div class="card"><h3>Llamar al dentista</h3><p>Cambiar la cita del jueves a la próxima semana, de preferencia en la tarde.</p></div>
+            <div class="card notitle"><p>Contraseña del wifi de casa de mi mamá: está pegada atrás del módem, pedírsela el domingo.</p></div>
+            <div class="card"><h3>Libro que me recomendaron</h3><p>«El infinito en un junco», de Irene Vallejo.</p></div>
+            <div class="card"><h3>Ideas para el cumpleaños de Ana</h3><p>Taller de cerámica, cena en el centro o un viaje corto a Valle de Bravo.</p></div>
+          </div>
+          <span class="fab" data-tag="notes_create_fab"><svg><use href="#i-add"/></svg></span>
+        </div></div>
+        <figcaption><span class="state-name">Contenido</span><span class="feats"><span class="feat">create_and_list_notes</span><span class="feat">edit_note</span></span><span class="note">La tercera nota no tiene título: muestra 3 líneas de contenido. Tocar una card abre el editor.</span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="t">Notas</span><span class="ib" data-tag="notes_search_button"><svg><use href="#i-search"/></svg></span></div>
+          <div class="body"><div class="center" data-tag="state_error"><span class="big">No se pudieron cargar tus notas.</span><span class="btn" data-tag="state_retry">Reintentar</span></div></div>
+        </div></div>
+        <figcaption><span class="state-name">Error</span><span class="feats"><span class="feat">create_and_list_notes</span></span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="t">Notas</span><span class="ib" data-tag="notes_search_button"><svg><use href="#i-search"/></svg></span></div>
+          <div class="body">
+            <div class="card"><h3>Comprar para la cena</h3><p>Tortillas, aguacate, limón, cilantro y queso fresco. Ver si queda crema.</p></div>
+            <div class="card notitle"><p>Contraseña del wifi de casa de mi mamá: está pegada atrás del módem, pedírsela el domingo.</p></div>
+            <div class="card"><h3>Libro que me recomendaron</h3><p>«El infinito en un junco», de Irene Vallejo.</p></div>
+            <div class="card"><h3>Ideas para el cumpleaños de Ana</h3><p>Taller de cerámica, cena en el centro o un viaje corto a Valle de Bravo.</p></div>
+          </div>
+          <div class="snack" data-tag="notes_snackbar"><span>Nota borrada</span><b>Deshacer</b></div>
+        </div></div>
+        <figcaption><span class="state-name">Nota borrada</span><span class="feats"><span class="feat">delete_note</span></span><span class="note">"Llamar al dentista" ya no está. "Deshacer" la regresa a su lugar.</span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="ib" data-tag="notes_search_close"><svg><use href="#i-back"/></svg></span><span class="search" data-tag="notes_search_field"><span class="caret">cena</span></span></div>
+          <div class="body" data-tag="notes_list">
+            <div class="card"><h3>Comprar para la cena</h3><p>Tortillas, aguacate, limón, cilantro y queso fresco. Ver si queda crema.</p></div>
+            <div class="card"><h3>Ideas para el cumpleaños de Ana</h3><p>Taller de cerámica, cena en el centro o un viaje corto a Valle de Bravo.</p></div>
+          </div>
+          <div class="kbd" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div></div>
+        <figcaption><span class="state-name">Buscando</span><span class="feats"><span class="feat">search_notes</span></span><span class="note">Busca en título y contenido. La flecha cierra la búsqueda y vuelve a mostrar todas las notas. Sin FAB.</span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="ib" data-tag="notes_search_close"><svg><use href="#i-back"/></svg></span><span class="search" data-tag="notes_search_field"><span class="caret">pasaporte</span></span></div>
+          <div class="body"><div class="center" data-tag="notes_search_empty"><span class="big">Ninguna nota coincide con «pasaporte».</span></div></div>
+          <div class="kbd" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div></div>
+        <figcaption><span class="state-name">Sin resultados</span><span class="feats"><span class="feat">search_notes</span></span></figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ═════════ Pantalla 2 ═════════ -->
+  <section class="screen" aria-labelledby="h-editor">
+    <div class="screen-head">
+      <h2 id="h-editor">2 · Editor de nota</h2><span class="route">editor?noteId={id}</span>
+      <p class="screen-desc">La misma pantalla crea y edita. "Guardar" guarda y vuelve a la lista; la flecha sale sin guardar. La papelera solo aparece al editar.</p>
+    </div>
+    <div class="row">
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="ib" data-tag="editor_back"><svg><use href="#i-back"/></svg></span><span class="t">Nueva nota</span><span class="tb off" data-tag="editor_save">Guardar</span></div>
+          <div class="field title" data-tag="editor_title_field"><span class="hint caret-end">Título</span></div>
+          <div class="divider"></div>
+          <div class="field content" data-tag="editor_content_field"><span class="hint">Escribe tu nota</span></div>
+          <div class="kbd" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div></div>
+        <figcaption><span class="state-name">Nueva, vacía</span><span class="feats"><span class="feat">create_and_list_notes</span></span><span class="note">"Guardar" deshabilitado: una nota vacía no se guarda.</span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="ib" data-tag="editor_back"><svg><use href="#i-back"/></svg></span><span class="t">Nueva nota</span><span class="tb" data-tag="editor_save">Guardar</span></div>
+          <div class="field title" data-tag="editor_title_field">Comprar para la cena</div>
+          <div class="divider"></div>
+          <div class="field content" data-tag="editor_content_field"><span class="caret-end">Tortillas, aguacate, limón, cilantro y queso fresco</span></div>
+          <div class="kbd" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div></div>
+        <figcaption><span class="state-name">Nueva, con texto</span><span class="feats"><span class="feat">create_and_list_notes</span></span><span class="note">Basta con título o contenido para habilitar "Guardar".</span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="ib" data-tag="editor_back"><svg><use href="#i-back"/></svg></span><span class="t">Editar nota</span></div>
+          <div class="body"><div class="center" data-tag="state_loading"><div class="spinner" aria-label="Cargando"></div></div></div>
+        </div></div>
+        <figcaption><span class="state-name">Cargando nota</span><span class="feats"><span class="feat">edit_note</span></span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="ib" data-tag="editor_back"><svg><use href="#i-back"/></svg></span><span class="t">Editar nota</span><span class="ib" data-tag="editor_delete"><svg><use href="#i-delete"/></svg></span><span class="tb" data-tag="editor_save">Guardar</span></div>
+          <div class="field title" data-tag="editor_title_field">Llamar al dentista</div>
+          <div class="divider"></div>
+          <div class="field content" data-tag="editor_content_field">Cambiar la cita del jueves a la próxima semana, de preferencia en la tarde.<br><br>Preguntar si ya llegó el resultado de la radiografía.</div>
+        </div></div>
+        <figcaption><span class="state-name">Editar</span><span class="feats"><span class="feat">edit_note</span><span class="feat">delete_note</span></span><span class="note">La papelera borra y vuelve a la lista con el snackbar.</span></figcaption>
+      </figure>
+
+      <figure class="state">
+        <div class="phone"><div class="screen-in">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="bar"><span class="ib" data-tag="editor_back"><svg><use href="#i-back"/></svg></span><span class="t">Editar nota</span><span class="ib" data-tag="editor_delete"><svg><use href="#i-delete"/></svg></span><span class="tb off" data-tag="editor_save">Guardar</span></div>
+          <div class="field title" data-tag="editor_title_field"><span class="hint caret-end">Título</span></div>
+          <div class="divider"></div>
+          <div class="field content" data-tag="editor_content_field"><span class="hint">Escribe tu nota</span></div>
+          <div class="kbd" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div></div>
+        <figcaption><span class="state-name">Editar, vaciada</span><span class="feats"><span class="feat">edit_note</span></span><span class="note">Si se borran título y contenido, "Guardar" se deshabilita.</span></figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <section class="screen" aria-labelledby="h-cover">
+    <div class="screen-head"><h2 id="h-cover">Qué toca cada feature</h2></div>
+    <div class="cover-wrap">
+      <table class="cover">
+        <thead><tr><th>Feature</th><th>Lista de notas</th><th>Editor</th></tr></thead>
+        <tbody>
+          <tr><td>1 · create_and_list_notes</td><td>Cargando, vacío, contenido, error, FAB</td><td>Nueva (vacía y con texto)</td></tr>
+          <tr><td>2 · edit_note</td><td>Tocar una card</td><td>Cargando nota, editar, editar vaciada</td></tr>
+          <tr><td>3 · delete_note</td><td>Snackbar "Nota borrada · Deshacer"</td><td>Papelera</td></tr>
+          <tr><td>4 · search_notes</td><td>Lupa, buscando, sin resultados</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend"><span>Los marcos siguen el tema claro u oscuro de tu dispositivo, igual que la app.</span></div>
+  </section>
+</div>
+
+<script>
+(function () {
+  var box = document.getElementById('tags');
+  var root = document.getElementById('root');
+  function apply() { root.classList.toggle('show-tags', box.checked); }
+  try { box.checked = localStorage.getItem('appnotes-tags') === '1'; } catch (e) {}
+  apply();
+  box.addEventListener('change', function () {
+    apply();
+    try { localStorage.setItem('appnotes-tags', box.checked ? '1' : '0'); } catch (e) {}
+  });
+})();
+</script>
