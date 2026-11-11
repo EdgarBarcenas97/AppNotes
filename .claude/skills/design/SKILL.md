@@ -45,7 +45,18 @@ Di: *"Diseño listo: <link>. Detalle en `docs/design.md`. Di **aprobado** o
 pide cambios."* Con cambios: actualiza ambos archivos, vuelve a publicar en el
 mismo Artifact y haz un commit nuevo. No sigas sin "aprobado".
 
-Al aprobar, di: *"Siguiente: `/feature` toma la primera feature pendiente."*
+Al aprobar, deja la aprobación en el repo (así `/feature` no depende de la
+conversación): pon debajo del título de `docs/design.md` la línea
+
+```
+**Estado:** aprobado el <AAAA-MM-DD> · mockup publicado en <link>
+```
+
+y haz commit `docs(design): aprobado`. Luego di: *"Siguiente: `/feature` toma
+la primera feature pendiente."*
+
+Si más adelante el diseño cambia fuera de una feature, quita esa línea hasta
+que el humano vuelva a aprobar.
 
 ## Reglas
 

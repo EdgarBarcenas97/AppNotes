@@ -21,6 +21,8 @@ bloquear ediciones fuera de lugar.
 ### 0 · Registrar
 - Si no existe `docs/product.md`, para y propone correr **`/kickoff`** primero.
 - Si no existe `docs/design.md`, para y propone correr **`/design`** primero.
+- Si `docs/design.md` no tiene la línea `**Estado:** aprobado el …`, para: el
+  diseño no está aprobado. Propone terminar `/design`.
 - Con enunciado: haz **máximo 3–5 preguntas** al humano, propone un **recorte
   de alcance** que quepa en el tiempo disponible y registra la feature en
   `feature_list.json` con `status: "pending"` y criterios de aceptación
@@ -33,8 +35,10 @@ Escribe en `specs/<name>/` (formato en `docs/specs.md`):
 - `requirements.md` — requisitos `R1..Rn` en EARS, cada uno verificable con un test.
 - `design.md` — archivos, **firmas públicas** (el contrato), estados de UI,
   copy, testTags, y al menos una alternativa descartada. Pantallas, textos y
-  testTags salen de `docs/design.md`; si la feature los cambia, actualiza
-  `docs/design.md` y el mockup.
+  testTags salen de `docs/design.md`; cita qué pantalla y qué estados de
+  `docs/design.md` toca la feature. Si la feature los cambia, actualiza
+  `docs/design.md` y el mockup (republica el mismo Artifact) y dilo al pedir
+  la aprobación de la spec: esa aprobación cubre el cambio de diseño.
 - `tasks.md` — tareas `T1..Tn`, cada una dice qué `R<n>` cubre.
 
 Commit `spec(<name>): …` · status → `spec_ready`.
@@ -66,7 +70,20 @@ Escribe `progress/review_<name>.md`. Si pide cambios → vuelve a 4 (máximo 2 r
 Ejecuta **`/compile-app`** (enciende el emulador si hace falta, instala y abre
 la app) y recorre **cada criterio de aceptación** con el MCP `mobile`. Guarda capturas en `progress/evidence/<name>/`.
 
-**⏸ PARA.** Muestra el resultado y pide al humano aprobar el cierre.
+**Contra el diseño:** por cada estado de `docs/design.md` que toca la feature
+(los citados en `specs/<name>/design.md`), lleva la app a ese estado, toma una
+captura y compárala con su marco del mockup: componentes, textos exactos y
+elementos visibles. Escribe `progress/evidence/<name>/demo.md` con una tabla:
+
+| Criterio / estado | Captura | Marco del mockup | ¿Coincide? | Diferencias |
+|---|---|---|---|---|
+
+Un texto o un elemento distinto del diseño es una diferencia, no un detalle:
+vuelve a la fase 4 o llévalo al humano. Diferencias aceptables (datos de
+ejemplo, teclado, hora) se anotan pero no bloquean.
+
+**⏸ PARA.** Muestra la tabla de `demo.md`, las capturas y el link al mockup, y
+pide al humano aprobar el cierre.
 
 ### 7 · Cierre
 status → `done` · una línea en `progress/metrics.md` (duración, intentos,
