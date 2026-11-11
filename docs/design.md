@@ -1,5 +1,8 @@
 # Diseño v1: AppNotes
 
+**Estado:** aprobado el 2026-11-11 · mockup publicado en
+https://claude.ai/artifact/SdkdFYGLh7ypGXCuwMvgMb
+
 Pantallas, estados, textos y testTags de la v1. El mockup visual está en
 [`docs/design/mockup.html`](design/mockup.html). Las specs de `/feature` toman
 de aquí los textos exactos (van a `strings.xml`) y los testTags (van a
