@@ -20,10 +20,8 @@ actual. **No cambias código:** si algo falla, paras y reportas.
    `scripts/trace.sh <name>`. Si falla, para.
 2. **¿Hay remoto?** `git remote -v`.
    - **Sí** → sigue con GitHub (pasos 3–6).
-   - **No** → di que no hay remoto y ofrece dos caminos; **no lo crees tú**:
-     - crear el repo: el humano corre **en su propia terminal**
-       `gh repo create <nombre> --private --source . --remote origin --push`
-       (sube `main` una sola vez; desde aquí `guard-bash` lo bloquearía);
+   - **No** → di que no hay remoto y ofrece dos caminos:
+     - correr **`/github`** (crea el repo y lo conecta) y volver a `/ship`;
      - o **merge local** (paso 7).
 3. **Subir la rama:** `git push -u origin feat/<name>`.
 4. **Crear la PR** con `gh pr create --base main --title "feat(<name>): <title>"`
@@ -58,5 +56,5 @@ Al terminar, una línea: PR, merge commit y la siguiente feature `pending`.
 
 - ❌ No hagas push a `main`, ni push forzado, ni `--no-verify`.
 - ❌ No hagas merge con el CI en rojo o pendiente.
-- ❌ No crees repos remotos ni cambies la visibilidad: eso lo decide el humano.
+- ❌ No crees repos remotos aquí: eso es `/github`.
 - ✅ Si hay conflictos con `main`, para y pregunta. No los resuelvas solo.

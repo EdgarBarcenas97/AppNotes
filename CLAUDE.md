@@ -46,7 +46,9 @@ Detalle, fuera de alcance y preguntas abiertas en [`docs/product.md`](docs/produ
 - `./init.sh --quick` — solo estado del harness.
 - `scripts/verify.sh` — la definición de "terminado".
 - `scripts/trace.sh <feature>` — requisitos ↔ tests.
+- `/github` — crea el repo en GitHub y lo conecta (una vez).
 - `/ship` — PR, CI y merge a main (con confirmación humana).
+- `/publish-android` — saca versión: tag → APK firmado en GitHub Releases.
 
 ## Reglas duras
 

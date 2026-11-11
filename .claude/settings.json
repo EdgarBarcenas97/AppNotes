@@ -25,7 +25,15 @@
       "Bash(gh pr create*)",
       "Bash(gh pr view*)",
       "Bash(gh pr checks*)",
-      "Bash(gh run view*)"
+      "Bash(gh run view*)",
+      "Bash(gh auth status*)",
+      "Bash(gh repo view*)",
+      "Bash(gh run list*)",
+      "Bash(gh run watch*)",
+      "Bash(gh secret list*)",
+      "Bash(gh release view*)",
+      "Bash(git tag*)",
+      "Bash(git describe*)"
     ],
     "deny": [
       "Read(./.env)",

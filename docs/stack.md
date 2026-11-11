@@ -7,6 +7,7 @@ StateFlow · Coroutines · **Hilt** · **Room** · Retrofit + OkHttp +
 kotlinx.serialization · Coil.
 Tests: JUnit4 · kotlinx-coroutines-test · Turbine · **MockK** · MockWebServer · Compose UI Test.
 Calidad: ktlint + **Android Lint**. CI: GitHub Actions (`scripts/verify.sh`).
+CD: tag `vX.Y.Z` → APK firmado en GitHub Releases (`/publish-android`).
 Un solo módulo `app`. Paquete raíz `dev.base.app`. Decisiones en `docs/adr/0001-stack.md`.
 
 ## Arquitectura (Clean + MVVM por paquetes)
@@ -65,6 +66,19 @@ app/src/main/java/dev/base/app/
 - `scripts/verify.sh --ui` → además, los tests de UI en el emulador.
 - `/compile-app` (o `scripts/run-app.sh`) → enciende el emulador si hace falta,
   instala y abre la app. `--screenshot <png>` guarda una captura.
+
+## CI/CD
+
+| Evento | Workflow | Qué corre |
+|---|---|---|
+| PR y push a `main` | `android-ci.yml` | `init.sh --quick` + `verify.sh`; sube el APK de debug como artefacto |
+| Tag `vX.Y.Z` (`/publish-android`) | `android-release.yml` | `verify.sh` + APK de release firmado → GitHub Release |
+
+- `versionName` sale del tag y `versionCode` del número de ejecución del
+  workflow. No se editan a mano.
+- Firma: secrets `ANDROID_KEYSTORE_*`. Los crea el humano una vez con
+  `scripts/setup-signing.sh` en su terminal; la llave vive en
+  `~/.android-keystores/`, nunca en el repo.
 
 ## Demo con el MCP `mobile`
 

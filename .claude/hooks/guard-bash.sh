@@ -19,6 +19,10 @@ fi
 if echo "$CMD" | grep -Eq 'git[[:space:]]+push.*(--force|[[:space:]]-f([[:space:]]|$))'; then
   block "push forzado"
 fi
+# Subir solo un tag de versión (vX.Y.Z) está permitido: así se publica un release.
+if echo "$CMD" | grep -Eq '^git[[:space:]]+push[[:space:]]+origin[[:space:]]+v[0-9]+\.[0-9]+\.[0-9]+[[:space:]]*$'; then
+  exit 0
+fi
 if echo "$CMD" | grep -Eq 'git[[:space:]]+push'; then
   BRANCH=$(git -C "$ROOT" branch --show-current 2>/dev/null || true)
   if echo "$CMD" | grep -Eq '(^|[[:space:]:])(main|master)([[:space:]]|$)' || [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then

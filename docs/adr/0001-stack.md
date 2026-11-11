@@ -24,6 +24,7 @@ plantilla antes de usarla.
 | Módulos | **Un módulo `:app`** con capas por paquete | Multimódulo con convention plugins | Compila más rápido y se navega fácil en 90 min. Se pasa a multimódulo cuando haya varios equipos o el build lo pida |
 | Análisis | **ktlint + Android Lint** | detekt, solo ktlint | Android Lint detecta problemas propios de Android (accesibilidad, recursos, APIs) sin dependencias extra |
 | CI | **GitHub Actions** que corre `scripts/verify.sh` | Sin CI, CI con emulador | El mismo gate local y remoto; los tests en emulador en CI son lentos y frágiles |
+| CD | **Tag `vX.Y.Z` → APK firmado en GitHub Releases** (`/publish-android`) | Release automático en cada merge; Firebase App Distribution; Play Console | Publicar es una decisión humana. GitHub Releases no pide cuentas extra; la versión sale del tag, sin commits de bump |
 | Tests de UI | **Compose UI Test** | + screenshot tests (Roborazzi) | Suficiente para verificar comportamiento; los screenshots exigen mantener imágenes de referencia |
 
 ## Arquitectura
