@@ -52,7 +52,7 @@ recorte: **una feature núcleo completa vale más que tres a medias.**
 ## Al terminar
 
 Muestra un resumen de 5 líneas y la lista de features en orden. Luego di:
-*"Siguiente: `/feature` toma la primera feature pendiente."*
+*"Siguiente: `/design` para ver y aprobar las pantallas antes de las specs."*
 
 ## Reglas
 

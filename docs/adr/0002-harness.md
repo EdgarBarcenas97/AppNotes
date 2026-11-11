@@ -13,9 +13,10 @@ persona del equipo que clone el repo.
 
 | Tema | Elegido | Alternativas descartadas | Por qué |
 |---|---|---|---|
-| Proceso | **SDD**: `/kickoff` → `/feature` (spec EARS → aprobación humana → contrato → tests en rojo → implementación → review → demo → cierre) | Pedirle código directo al modelo | La spec es el contrato: si un criterio no es verificable, el agente no sabe cuándo terminó |
+| Proceso | **SDD**: `/kickoff` → `/design` → `/feature` (spec EARS → aprobación humana → contrato → tests en rojo → implementación → review → demo → cierre) | Pedirle código directo al modelo | La spec es el contrato: si un criterio no es verificable, el agente no sabe cuándo terminó |
 | Orquestación | **Una sesión principal + subagentes** (`tester`, `implementer`, `reviewer`) | Agent teams; varias sesiones en paralelo | El flujo es una cadena secuencial. Los subagentes arrancan con contexto limpio (independencia del tester y del reviewer) y el humano no hace de mensajero |
 | Arranque | **Plantilla probada + script** (`/harness`) | Que la IA genere el proyecto | Lo mecánico no se le pide a la IA: versiones inventadas rompen el build |
+| Integración | **`/ship`**: PR con spec, review y evidencia, CI en verde, merge commit con un sí humano | Push directo a main; squash | Nada llega a main sin PR. El merge commit conserva `test: red` antes de `feat`, la prueba de tests primero |
 | Gates | **Hooks** (fase, comandos peligrosos, lint al editar, estado al terminar) + **scripts** (`verify.sh`, `trace.sh`) | Solo instrucciones en texto | Las reglas las aplica el sistema; lo verificable no se deja al juicio del modelo |
 | Tests | El `tester` escribe los tests **antes** y sin ver la implementación; quedan congelados desde `red_sha` | El mismo agente escribe código y tests | La IA no se califica a sí misma |
 | Skills vs agentes | **Skill** para procedimientos fijos (`/harness`, `/kickoff`, `/feature`, `/compile-app`); **agente** cuando hace falta contexto propio y criterio | Todo como agentes | Un procedimiento repetible no necesita criterio ni contexto aislado |

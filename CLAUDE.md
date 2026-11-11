@@ -15,19 +15,22 @@ Detalle, fuera de alcance y preguntas abiertas en [`docs/product.md`](docs/produ
 
 - **Al empezar el proyecto: `/kickoff`.** Es la entrevista de producto: qué app,
   para quién, qué entra en la v1. Llena `docs/product.md` y `feature_list.json`.
+- **Después: `/design`.** Pantallas, estados y textos, con un mockup publicado
+  como Artifact que el humano aprueba. Llena `docs/design.md`.
 - Toda feature nueva entra con **`/feature "<enunciado>"`** (flujo SDD). No
   escribas código fuera de ese flujo.
 - La sesión principal **orquesta**: conversa con el humano, escribe la spec y
   lanza subagentes. No edita código ni tests.
 - Subagentes (`.claude/agents/`): `tester` (tests en rojo desde la spec),
   `implementer` (contrato e implementación), `reviewer` (revisión independiente).
-- Dos puertas humanas: aprobar la spec y aprobar el cierre.
+- Puertas humanas: aprobar el diseño (una vez), y por feature aprobar la spec y el cierre.
 
 ## Mapa
 
 | Ruta | Qué es |
 |---|---|
 | `docs/product.md` | Qué app es, para quién, alcance y fuera de alcance |
+| `docs/design.md` | Pantallas, navegación, estados, textos y testTags (mockup en `docs/design/`) |
 | `docs/stack.md` | Stack, arquitectura, convenciones, rutas y comandos |
 | `docs/adr/` | Decisiones de arquitectura con alternativas descartadas |
 | `docs/specs.md` | Formato de specs (EARS) y trazabilidad |
@@ -43,6 +46,7 @@ Detalle, fuera de alcance y preguntas abiertas en [`docs/product.md`](docs/produ
 - `./init.sh --quick` — solo estado del harness.
 - `scripts/verify.sh` — la definición de "terminado".
 - `scripts/trace.sh <feature>` — requisitos ↔ tests.
+- `/ship` — PR, CI y merge a main (con confirmación humana).
 
 ## Reglas duras
 

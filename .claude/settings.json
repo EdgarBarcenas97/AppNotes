@@ -17,7 +17,15 @@
       "Bash(adb devices*)",
       "Bash(adb install*)",
       "Bash(adb shell am start*)",
-      "Bash(adb exec-out screencap*)"
+      "Bash(adb exec-out screencap*)",
+      "Bash(git push -u origin feat/*)",
+      "Bash(git branch*)",
+      "Bash(git pull*)",
+      "Bash(git remote -v)",
+      "Bash(gh pr create*)",
+      "Bash(gh pr view*)",
+      "Bash(gh pr checks*)",
+      "Bash(gh run view*)"
     ],
     "deny": [
       "Read(./.env)",

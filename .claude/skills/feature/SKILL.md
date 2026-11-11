@@ -20,6 +20,7 @@ bloquear ediciones fuera de lugar.
 
 ### 0 · Registrar
 - Si no existe `docs/product.md`, para y propone correr **`/kickoff`** primero.
+- Si no existe `docs/design.md`, para y propone correr **`/design`** primero.
 - Con enunciado: haz **máximo 3–5 preguntas** al humano, propone un **recorte
   de alcance** que quepa en el tiempo disponible y registra la feature en
   `feature_list.json` con `status: "pending"` y criterios de aceptación
@@ -31,7 +32,9 @@ bloquear ediciones fuera de lugar.
 Escribe en `specs/<name>/` (formato en `docs/specs.md`):
 - `requirements.md` — requisitos `R1..Rn` en EARS, cada uno verificable con un test.
 - `design.md` — archivos, **firmas públicas** (el contrato), estados de UI,
-  copy, testTags, y al menos una alternativa descartada.
+  copy, testTags, y al menos una alternativa descartada. Pantallas, textos y
+  testTags salen de `docs/design.md`; si la feature los cambia, actualiza
+  `docs/design.md` y el mockup.
 - `tasks.md` — tareas `T1..Tn`, cada una dice qué `R<n>` cubre.
 
 Commit `spec(<name>): …` · status → `spec_ready`.
@@ -70,6 +73,8 @@ status → `done` · una línea en `progress/metrics.md` (duración, intentos,
 rondas de review) · fila de la feature en la tabla de `README.md` · resumen a
 `progress/history.md` · vaciar `.harness/phase`
 · commit `chore(<name>): close`.
+
+Di: *"Feature cerrada en `feat/<name>`. Siguiente: `/ship` para la PR y el merge a main."*
 
 ## Reglas de comunicación con subagentes
 
